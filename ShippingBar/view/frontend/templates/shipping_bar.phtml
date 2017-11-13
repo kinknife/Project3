@@ -1,0 +1,95 @@
+<?php
+
+function debug_to_console( $data ) {
+    $output = $data;
+    if ( is_array( $output ) )
+    $output = implode( ',', $output);
+
+    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+}
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+$itemsCollection = $cart->getQuote()->getItemsCollection();
+$itemsVisible = $cart->getQuote()->getAllVisibleItems();
+$items = $cart->getQuote()->getAllItems();
+$subTotal = $cart->getQuote()->getSubtotal();
+$grandTotal = $cart->getQuote()->getGrandTotal();
+$totalItems = $cart->getQuote()->getItemsCount();
+$totalQuantity = $cart->getQuote()->getItemsQty();
+
+$symbol = $block->getCurrentCurrencySymbol();
+
+$goal = $block->getValue();
+$type = $block->getType();
+$displaytype = $block->getDisplayType();
+if($type==1) {$goalleft = $goal - $grandTotal;}
+else {$goalleft = $goal - $totalQuantity;}
+//content
+$cartEmpty = $block->getCartEmpty();
+$cartNotEmpty = $block->getCartNotEmpty();
+$cartGoal = $block->getCartGoal();
+if($type==1) {
+    $cartEmpty = str_replace("{{ruleGoal}}", $goal . $symbol, $cartEmpty);
+    $cartNotEmpty = str_replace("{{ruleGoal}}", $goal . $symbol, $cartNotEmpty);
+    $cartNotEmpty = str_replace("{{ruleGoalLeft}}", $goalleft . $symbol, $cartNotEmpty);
+    $cartGoal = str_replace("{{ruleGoal}}", $goal . $symbol, $cartGoal);
+}
+if($type==2&&$goalleft>1) {
+    $cartEmpty1 = str_replace("{{ruleGoal}}", $goal . " products", $cartEmpty);
+    $cartNotEmpty1 = str_replace("{{ruleGoal}}", $goal . " products", $cartNotEmpty);
+    $cartNotEmpty1 = str_replace("{{ruleGoalLeft}}", $goalleft . " products", $cartNotEmpty);
+    $cartGoal1 = str_replace("{{ruleGoal}}", $goal . " products", $cartGoal);
+}
+else{
+    $cartEmpty1 = str_replace("{{ruleGoal}}", $goal . " product", $cartEmpty);
+    $cartNotEmpty1 = str_replace("{{ruleGoal}}", $goal . " product", $cartNotEmpty);
+    $cartNotEmpty1 = str_replace("{{ruleGoalLeft}}", $goalleft . " product", $cartNotEmpty);
+    $cartGoal1 = str_replace("{{ruleGoal}}", $goal . " product", $cartGoal);
+}
+$enable = $block->getEnable();
+$second = $block->getDelay();
+$time = "class='wow ".$displaytype."' data-wow-delay='".$second."s'";
+$fontfamily = $block->getFontFamily();
+$fontcolor = $block->getFontColor() == "" ? "#011baf" : $block->getFontColor();
+$fontsize = $block->getFontSize()."px";
+$fontweight = $block->getFontWeight();
+$textalign = $block->getTextAlign();
+$backgroundcolor = $block->getBackgroundColor();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+    #status{font-family: "<?php echo $fontfamily; ?>"; font-weight: <?php echo $fontweight; ?>;
+            color: <?php echo $fontcolor; ?>; font-size: <?php echo $fontsize; ?>;
+            border-color: #0000aa; border: 2px solid #FF0000;
+            border-radius: 5px; text-align: <?php echo $textalign;?>;
+            float: left; background-color: <?php echo $backgroundcolor;?>;
+            width: 100%;}
+
+    </style>
+</head>
+
+<body>
+
+<?php 
+    debug_to_console($grandTotal);
+?> 
+<p <?php echo $time; ?> data-wow-duration='3s'  id='status'>
+    <?php
+    if($type==1){
+    if ($grandTotal == null || $grandTotal == 0){echo $cartEmpty;}
+    else{if ($grandTotal > 0 && $grandTotal < $goal) {echo $cartNotEmpty;}
+        if ($grandTotal >= $goal) {echo $cartGoal;}}}
+    else{
+        if ($totalQuantity == null || $totalQuantity == 0){echo $cartEmpty1;}
+        else{if ($totalQuantity > 0 && $totalQuantity < $goal) {echo $cartNotEmpty1;}
+            if ($totalQuantity >= $goal) {echo $cartGoal1;}}}
+    ?>
+</p>
+</body>
+</html>
+
+
+

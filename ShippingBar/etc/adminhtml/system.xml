@@ -1,0 +1,109 @@
+<?xml    version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/sy
+stem_file.xsd">
+    <system>
+        <tab id="Project3" translate="label" sortOrder="500">
+            <label>Project3</label>
+        </tab>
+        <section id="shippingstore" translate="label" type="text" sortOrder="100"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Free Shipping Bar</label>
+            <tab>Project3</tab>
+            <resource>Project3_ShippingBar::config_shippingbar</resource>
+            <group id="shippingpage" translate="label" type="text" sortOrder="1"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Shipping Bar</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="shippingtype" translate="label" type="select"
+                       sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Shipping Type</label>
+                    <source_model>Project3\ShippingBar\Model\Config\Source\Products</source_model>
+                </field>
+                <field id="shipping_goal" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Free Shipping Goal</label>
+                    <comment>Goal Price of products/Goal Quantity of products</comment>
+                </field>
+            </group>
+
+            <group id="wheretodisplay" translate="label" type="text" sortOrder="2"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Where to Display</label>
+                <field id="page_delay" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display with delay after page load, seconds</label>
+                    <comment>0 - no delay</comment>
+                </field>
+                <field id="page_display" translate="label" type="select"
+                       sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pages</label>
+                    <source_model>Project3\ShippingBar\Model\Config\Source\Pages</source_model>
+                </field>
+                <field id="display_type" translate="label" type="select"
+                       sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Type</label>
+                    <source_model>Project3\ShippingBar\Model\Config\Source\DisplayType</source_model>
+                </field>
+            </group>
+
+            <group id="content" translate="label" type="text" sortOrder="3"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Content</label>
+                <field id="cart_empty" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Content when cart is empty</label>
+                </field>
+                <field id="cart_not_empty" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Content when cart is not empty</label>
+                </field>
+                <field id="cart_goal" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Content when goal is reached</label>
+                    <comment>{{ruleGoal}} - return value of the Goal in current currency with currency code. {{ruleGoalLeft}} - returns value left to reach the Goal.(Left = Goal - CartTotal)</comment>
+                </field>
+            </group>
+
+            <group id="design" translate="label" type="text" sortOrder="4"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Design</label>
+                <field id="font_family" translate="label" type="select"
+                       sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font Family</label>
+                    <source_model>Project3\ShippingBar\Model\Config\Source\FontFamily</source_model>
+                    <comment>Most popular Google Fonts are used.</comment>
+                </field>
+                <field id="font_size" translate="label" type="text"
+                       sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font Size (px)</label>
+                </field>
+                <field id="font_weight" translate="label" type="select"
+                       sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font Weight</label>
+                    <source_model>Project3\ShippingBar\Model\Config\Source\FontWeight</source_model>
+                </field>
+                <field id="text_align" translate="label" type="select"
+                       sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Align</label>
+                    <source_model>Project3\ShippingBar\Model\Config\Source\TextAlign</source_model>
+                </field>
+                <field id="font_color" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font Color</label>
+                    <comment>Color code, example: #F1FFEB</comment>
+                </field>
+                <field id="background_color" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color</label>
+                    <comment>Color code, example: #FF0000</comment>
+                </field>
+
+            </group>
+
+
+        </section>
+
+    </system>
+</config>
+
+
+        <!--<label>Content</label>-->
+        <!--<label>Design</label>-->
+        <!--<label>Preview</label>-->

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Project3_ShippingBar/css/status.css"/>
+        <css src="Project3_ShippingBar/css/animate.css"/>
+        <link src="Project3_ShippingBar/js/wow.min_.js"/>
+    </head>
+    <body>
+        <referenceContainer name="header.container">
+            <block class="Project3\ShippingBar\Block\Home" template="Project3_ShippingBar::shipping_bar.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>
+
