@@ -1,0 +1,28 @@
+<?php
+$productArray = $block->getType();
+$isStatus = $block->getStatus();
+$isNumber = $block->getNumber();
+//if($productArray['type']=='configurable') {
+//    echo $productArray['price'];
+//    echo '<br />';
+//};
+//$aa = getPrice();
+$numberleft = $productArray['numberleft'];
+$type = $productArray['type'];
+$qty = $productArray['qty'];
+$status = $productArray['status'];
+//$helper=$this->helper('Project3\StockStatus\Helper\Data');
+//$size = $helper->getsize();
+//$color = $helper->getcolor();
+//echo $size;
+
+if($isNumber=='1'&&$type=='simple') {
+    if ($numberleft >= $qty) {
+        echo "<p class='wow tada' data-wow-iteration='2' style='font-weight: bolder; float: right;'>Only $qty Left !!!</p>";
+        echo '<br />';
+    }
+}
+if($isStatus=='1') {
+    echo "<p style='width: 100%;' class='wow shake' data-wow-duration='5s' data-wow-delay='2s' data-wow-iteration='10' id='status'>$status</p>";
+    echo '<br />';
+}

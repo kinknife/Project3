@@ -1,0 +1,35 @@
+<?xml    version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/sy
+stem_file.xsd">
+    <system>
+        <tab id="Project3" translate="label" sortOrder="500">
+            <label>Project3</label>
+        </tab>
+
+        <section id="stockstore" translate="label" type="text" sortOrder="100"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Custom Stock Status</label>
+            <tab>Project3</tab>
+            <resource>Project3_StockStatus::config_stockstatus</resource>
+            <group id="statuspage" translate="label" type="text" sortOrder="1"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+
+
+
+                <field id="enabled_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Stock Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="enabled_number" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Notice Number Left</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+            </group>
+        </section>
+
+    </system>
+</config>
