@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Project3_FbComment::fbcomment"
+             title="Facebook Comment"
+             module="Project3_FbComment"
+             action="adminhtml/system_config/edit/section/commentstore/"
+             sortOrder="60"
+             resource="Project3_FbComment::fbcomment"/>
+    </menu>
+</config>

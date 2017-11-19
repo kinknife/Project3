@@ -10,6 +10,7 @@ function debug_to_console( $data ) {
 
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+$total = $objectManager -> get('\Magento\Quote\Model\Quote\Address\Total');
 $itemsCollection = $cart->getQuote()->getItemsCollection();
 $itemsVisible = $cart->getQuote()->getAllVisibleItems();
 $items = $cart->getQuote()->getAllItems();
@@ -72,22 +73,67 @@ $backgroundcolor = $block->getBackgroundColor();
 </head>
 
 <body>
-
-<?php 
-    debug_to_console($grandTotal);
-?> 
-<p <?php echo $time; ?> data-wow-duration='3s'  id='status'>
-    <?php
-    if($type==1){
-    if ($grandTotal == null || $grandTotal == 0){echo $cartEmpty;}
-    else{if ($grandTotal > 0 && $grandTotal < $goal) {echo $cartNotEmpty;}
-        if ($grandTotal >= $goal) {echo $cartGoal;}}}
-    else{
-        if ($totalQuantity == null || $totalQuantity == 0){echo $cartEmpty1;}
-        else{if ($totalQuantity > 0 && $totalQuantity < $goal) {echo $cartNotEmpty1;}
-            if ($totalQuantity >= $goal) {echo $cartGoal1;}}}
+    <?php 
+        if ($enable == 1) :
     ?>
-</p>
+            <p <?php echo $time; ?> data-wow-duration='3s'  id='status'>
+                <?php
+                if($type==1){
+                    if ($grandTotal == null || $grandTotal == 0){
+                        echo $cartEmpty;
+                    } else {
+                        if ($grandTotal > 0 && $grandTotal < $goal) {
+                            echo $cartNotEmpty;
+                        }
+                        if ($grandTotal >= $goal) {
+                            echo $cartGoal;
+                        }
+                    }   
+                } else {
+                    if ($totalQuantity == null || $totalQuantity == 0){
+                        echo $cartEmpty1;
+                    } else {
+                        if ($totalQuantity > 0 && $totalQuantity < $goal) {
+                            echo $cartNotEmpty1;
+                        }
+                        if ($totalQuantity >= $goal) {
+                            echo $cartGoal1;
+                        }
+                    }
+                }
+                ?>
+            </p>
+    <?php 
+        endif
+    ?>
+    <script>
+    require(['jquery', 'jquery/ui'], function($){ 
+        $("document").ready(function(){
+            var cartEmpty = "<?php echo ($cartEmpty);?>",
+                cartNotEmpty = "<?php echo ($cartNotEmpty);?>",
+                cartGoal = "<?php echo ($cartGoal);?>",
+                type = <?php echo $type;?>,
+                goal = <?php echo $goal;?>,grandTotal;
+            setInterval(function(){
+                console.log(<?php echo $cart -> getQuote()-> collectTotals();?>);
+                grandTotal = <?php if($cart->getQuote()->getGrandTotal() == "" || $cart->getQuote()->getGrandTotal() == null) { echo 0;} else {echo $cart->getQuote()->getGrandTotal();}?>;
+                console.log(grandTotal);
+                if(type == 1){
+                    if (grandTotal == null || grandTotal == 0){
+                        $("#status").html(cartEmpty);
+                    } else{
+                        if (grandTotal > 0 && grandTotal < goal) {
+                            $("#status").html(cartNotEmpty);
+                        }
+                        if (grandTotal >= goal) {
+                            $("#status").html(cartGoal);
+                        }
+                    }
+                }
+            },500);
+        });
+    });
+    </script>
 </body>
 </html>
 

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <commentstore>
+            <commentpage>
+                <enabled>1</enabled>
+                <tab_title>Facebook Comment</tab_title>
+                <app_id>1917408658528547</app_id>
+            </commentpage>
+        </commentstore>
+    </default>
+</config>
