@@ -19,17 +19,17 @@ class ProductTab extends AbstractProduct {
     }
 
 
-    // protected function _beforeToHtml()
-    // {
-    //     $_isEnabled = $this->_config->getValue('commentstore/commentpage/enabled');
-    //     if ($_isEnabled) {
-    //         $this->setTemplate('product_tab.phtml');
-    //     } else {
-    //         $this->getLayout()->unsetElement('facebook.comment.tab');
-    //     }
+    protected function _beforeToHtml()
+    {
+        $_isEnabled = $this->_config->getValue('commentstore/commentpage/enabled');
+        if ($_isEnabled) {
+            $this->setTemplate('product_tab.phtml');
+        } else {
+            $this->setTemplate('blank.phtml');
+        }
 
-    //     return parent::_beforeToHtml();
-    // }
+        return parent::_beforeToHtml();
+    }
 
 
     public function setProductTabTitle()
